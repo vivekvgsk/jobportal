@@ -1,0 +1,54 @@
+{%extends 'home.html'%}
+{%block body_block%}
+
+
+
+<br><br>
+<div class="container">
+    <div class="row">
+        <div>
+            <div class="card" style="width:1000px;margin-left:-250px">
+                <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold">YOUR POSTED
+                    JOBS</h5>
+                <div class="card-body">
+                    <table class="table table-bordered table table-striped table-hover">
+                        <tr class="bg-warning">
+                            <td>Applicant Name</td>
+                            <td>Position</td>
+                            <td>Qualification</td>
+                            <td>Salary</td>
+                            <td>Experience Required</td>
+                            <td>Posted Date</td>
+                            <td>Closing Date</td>
+                            <td>Status</td>
+                            <td colspan="3">Action</td>
+
+                        </tr>
+                        {%for application in applications%}
+                        <tr>
+                            <td>{{application.applicant.first_name}}</td>
+
+
+
+                            <td>
+                                <a href="" class="btn btn-warning">Edit</a>
+                            </td>
+                            <td>
+                                <a href="" class="btn btn-danger">Delete</a>
+
+                            </td>
+                        </tr>
+                        {%endfor%}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}
+
+
+
+{%endblock%}

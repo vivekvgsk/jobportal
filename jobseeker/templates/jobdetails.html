@@ -1,0 +1,28 @@
+{%extends 'index.html'%}
+{%block body_block%}
+
+<!--<div class="card w-100">-->
+<div class="card text-dark bg-info mb-3" style="max-width: 100rem;">
+
+  <div class="card-body">
+    <h4 class="card-title" style="text-align:left;color:blue"><i class="fas fa-user-tie"></i>&nbsp;&nbsp;&nbsp;{{job.description}}</h4>
+      <p class="card-text" style="text-align:left"><i class="fas fa-building"></i>&nbsp;&nbsp;{{job.employer.user}}  {{job.employer.user.last_name}}</p>
+        <p class="card-text" style="text-align:left">Required Skills:{{job.skills_req}}</i></p>
+      <p class="card-text" style="text-align:left"><i class="fas fa-briefcase"></i>&nbsp;&nbsp;Experience Required:&nbsp;&nbsp;{{job.exp_req}}</p>
+      <p class="card-text" style="text-align:left"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Location:&nbsp;&nbsp;{{job.location}}</p>
+      <p class="card-text" style="text-align:left"><i class="fas fa-wallet"></i>&nbsp;&nbsp;Salary:&nbsp;&nbsp;<i class="fas fa-rupee-sign"></i>&nbsp;&nbsp;{{job.salary}}</i></p>
+      <p class="card-text" style="text-align:left"><i class="fas fa-external-link-square-alt"></i>&nbsp;&nbsp;Website:&nbsp;&nbsp;<a href="">{{job.employer.website}}</a></i></p>
+      <p class="card-text" style="text-align:left"><i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;Last Date to Apply:&nbsp;&nbsp;{{job.closing_date}}</i></p>
+    <a href="{%url 'apply' job.id%}" class="btn btn-primary">Apply</a>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+{%endblock%}

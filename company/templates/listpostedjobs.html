@@ -1,0 +1,54 @@
+{%extends 'home.html'%}
+{%block body_block%}
+
+<br><br>
+<div class="container">
+    <div class="row">
+        <div>
+            <div class="card" style="width:1000px;margin-left:-250px">
+                <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold">YOUR POSTED
+                    JOBS</h5>
+                <div class="card-body">
+                    <table class="table table-bordered table table-striped table-hover">
+                        <tr class="bg-warning">
+                            <td>Company Name</td>
+                            <td>Position</td>
+                            <td>Skills Required</td>
+                            <td>Salary</td>
+                            <td>Experience Required</td>
+                            <td>Posted Date</td>
+                            <td>Closing Date</td>
+                            <td>Status</td>
+                            <td colspan="3">Action</td>
+
+                        </tr>
+                        {%for job in jobs%}
+                        <tr>
+                            <td>{{job.employer.user}}</td>
+                            <td>{{job.description}}</td>
+                            <td>{{job.skills_req}}</td>
+                            <td>{{job.salary}}</td>
+                            <td>{{job.exp_req}}</td>
+                            <td>{{job.date_posted}}</td>
+                            <td>{{job.closing_date}}</td>
+                            <td>{{job.job_status}}</td>
+
+
+                            <td>
+                                <a href="{%url 'update' job.id%}" class="btn btn-warning">Edit</a>
+                            </td>
+                            <td>
+                                <a href="{%url 'removejob' job.id%}" class="btn btn-danger">Delete</a>
+
+                            </td>
+                        </tr>
+                        {%endfor%}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}
