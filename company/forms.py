@@ -1,4 +1,4 @@
-from .models import MyUser,Employer,Job
+from .models import MyUser,Employer,Job,Jobseeker
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import models
@@ -17,16 +17,16 @@ class EmployerForm(forms.ModelForm):
         model=Employer
         fields="__all__"
 
-class JobCreateForm(forms.ModelForm):
-    class Meta:
-        model = Job
-        fields = "__all__"
-
-
 # class JobCreateForm(forms.ModelForm):
 #     class Meta:
-#         model=Job
-#         fields=["location","description","skills_req","salary","exp_req","job_status","closing_date"]
+#         model = Job
+#         fields = "__all__"
+
+
+class JobCreateForm(forms.ModelForm):
+    class Meta:
+        model=Job
+        fields=["location","description","skills_req","salary","exp_req","job_status","closing_date"]
 
 # class JobCreateForm(forms.Form):
 #     employer=forms.ModelMultipleChoiceField(queryset=MyUser.objects.filter(role="Employer"))
@@ -40,3 +40,7 @@ class JobCreateForm(forms.ModelForm):
 #     job_status = forms.CharField(widget=forms.Select(choices=job_options))
 #     closing_date = forms.DateField()
 
+class JobseekerProfileCreateForm(forms.ModelForm):
+    class Meta:
+        model=Jobseeker
+        fields=["qualification","passout_year","skills","experience"]

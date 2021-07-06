@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+         <script src="https://kit.fontawesome.com/ed0e79b1f2.js" crossorigin="anonymous"></script>
+        <!-- Favicon-->
+        <!--<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />-->
+         <link rel="icon" type="image/x-icon" href="{%static 'assets/favicon.ico'%}"/>
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <!--<link href="css/styles.css" rel="stylesheet" />-->
+        <link href="{%static 'css/style.css'%}" rel="stylesheet"/>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'jprofile' %}">My Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{%url 'alljobs'%}">New Jobs</a></li>
+                         <li class="nav-item"><a class="nav-link" href="{%url 'listappliedjobs'%}">My applications</a></li>
+                         <!--<li class="nav-item"><a class="nav-link" href="">Log Out</a></li>-->
+                        <!--<li class="nav-item dropdown">-->
+                            <!--<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login</a>-->
+                            <!--<ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+
+                                <!--<li><hr class="dropdown-divider" /></li>-->
+                                <!--<li><a class="dropdown-item" href="{%url 'login'%}">As Jobseeker</a></li>-->
+                                <!--<li><a class="dropdown-item" href="{%url 'signin'%}">As Employer</a></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    </ul>
+                    <form class="d-flex">
+                        <a href="{%url 'logout'%}" class="btn btn-outline-danger" type="submit">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-primary py-5" style="background-image:url(/static/images/hb.jpg);background-width:180px">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder" style="color:yellow">Find the Job That Fits Your Life! Its Time to do the Best work of your Life!</h1>
+                    <p class="lead fw-normal text-red-50 mb-0">Your Dream Job is Waiting</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <!--<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">-->
+
+ {%block body_block%}
+
+
+
+
+            {%endblock%}
+
+
+                </div>
+            <br>
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <!--<script src="js/scripts.js"></script>-->
+    <script src="{%static 'js/script.js'%}"></script>
+    </body>
+</html>

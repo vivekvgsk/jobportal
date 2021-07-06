@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-jobseeker login
-<form action="" method="post">
+{%extends 'basehome.html'%}
+{%block body_block%}
+
+
+<div class="card" style="width:400px">
+    <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold;"><center>Jobseeker Login</center></h5>
+  <div class="card-body">
+    <form action="" method="post">
     {%csrf_token%}
-    {{form.as_p}}
-    <input type="submit" value="Login">
+        <table>
+            {{form.as_table}}
+        </table>
+
+    <input type="submit" value="Login" class="btn btn-success">
+
 </form>
-</body>
-</html>
+</div>
+</div>
+
+{% endblock%}

@@ -30,10 +30,13 @@ class SignInView(TemplateView):
             password=form.cleaned_data.get("password")
             user=authenticate(request,username=username,password=password)
             if user:
-                login(request,user)
-                return redirect("postedjobs")
-            else:
-                print("failed")
+                if user.role=="Employer":
+                    login(request,user)
+
+                    return redirect("postedjobs")
+
+                else:
+                    print("failed")
         return render(request, self.template_name, self.context)
 
 class SignOutView(TemplateView):
@@ -54,33 +57,33 @@ class EmployerCreateView(CreateView):
 #     template_name = "createjob.html"
 #     success_url = reverse_lazy("postedjobs")
 
-class JobCreateView(TemplateView):
-    model= Job
-    form_class=JobCreateForm
-    template_name = "createjob.html"
-    context={}
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        self.context["form"] = form
-        return render(request, self.template_name, self.context)
-    def post(self,request,*args,**kwargs):
-        form=self.form_class(request.POST)
-        if form.is_valid():
-            user=form.cleaned_data.get("user")
-            if user==request.user:
-                form.save()
-                return redirect("postedjobs")
-            else:
-                print("please check your company name")
-
-
-
-
-
-
-        return render(request, self.template_name, self.context)
-
+# class JobCreateView(TemplateView):
+#     model= Job
+#     form_class=JobCreateForm
+#     template_name = "createjob.html"
+#     context={}
+#
+#     def get(self, request, *args, **kwargs):
+#         form = self.form_class()
+#         self.context["form"] = form
+#         return render(request, self.template_name, self.context)
+#     def post(self,request,*args,**kwargs):
+#         form=self.form_class(request.POST)
+#         if form.is_valid():
+#             user=form.cleaned_data.get("user")
+#             if user==request.user:
+#                 form.save()
+#                 return redirect("postedjobs")
+#             else:
+#                 print("please check your company name")
+#
+#
+#
+#
+#
+#
+#         return render(request, self.template_name, self.context)
+#
 
 
 
@@ -124,10 +127,44 @@ class ApplicantListView(TemplateView):
     template_name = "applicantlist.html"
     def get(self,request,*args,**kwargs):
 
-        applications=self.model.objects.filter(job=request.user)
+        applications=self.model.objects.filter(application_status="Pending")
         self.context["applications"]=applications
         return render(request, self.template_name, self.context)
 
+
+class JobCreateView(TemplateView):
+    model= Job
+    form_class=JobCreateForm
+    template_name = "createjob.html"
+    context={}
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        self.context["form"] = form
+        return render(request, self.template_name, self.context)
+    def post(self,request,*args,**kwargs):
+        form=self.form_class(request.POST)
+        if form.is_valid():
+            location=form.cleaned_data.get("location")
+            description=form.cleaned_data.get("description")
+            skills_req=form.cleaned_data.get("skills_req")
+            salary=form.cleaned_data.get("salary")
+            exp_req=form.cleaned_data.get("exp_req")
+            job_status=form.cleaned_data.get("job_status")
+            closing_date=form.cleaned_data.get("closing_date")
+            job=Job(employer_id=request.user.id,user=request.user,location=location,description=description,
+                    skills_req=skills_req,salary=salary,exp_req=exp_req,job_status=job_status,closing_date=closing_date)
+            job.save()
+
+
+
+
+
+
+
+
+
+        return render(request, self.template_name, self.context)
 
 
 
