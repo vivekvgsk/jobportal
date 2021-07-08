@@ -1,6 +1,12 @@
 {%extends 'basehome.html'%}
 {%block body_block%}
-
+{%if messages%}
+            {%for message in messages%}
+            <div style="color:red">
+                {{message}}
+            </div>
+            {%endfor%}
+            {%endif%}
 
 <div class="card" style="width:400px">
     <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold;"><center>Employer Login</center></h5>
@@ -11,7 +17,7 @@
             {{form.as_table}}
         </table>
 
-    <input type="submit" value="Login" class="btn btn-success">
+    <input type="submit" value="Login" class="btn btn-primary" style="margin-left:100px;width:150px">
 
 </form>
 </div>

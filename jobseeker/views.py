@@ -1,10 +1,15 @@
 from django.shortcuts import render,redirect
-from django.views.generic import TemplateView,ListView,DetailView
+from django.views.generic import TemplateView,ListView,DetailView,UpdateView
 from company.models import MyUser,Job,Applications,Jobseeker
 from company.forms import LoginForm,JobseekerProfileCreateForm
 from django.contrib.auth import authenticate,login,logout
 from company.views import AccountCreationView
 from django.contrib import messages
+from .filters import JobFilter
+from django.urls import reverse_lazy
+from django.db.models import Q
+from .decorators import loginrequired
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 class LoginView(TemplateView):
@@ -28,8 +33,8 @@ class LoginView(TemplateView):
                     login(request,user)
                     return redirect("alljobs")
                 else:
-                    print("failed")
-                    return redirect("register")
+                    messages.error(request, "invalid user")
+                    return render(request, self.template_name, self.context)
 
         return render(request, self.template_name, self.context)
 
@@ -38,12 +43,13 @@ class LogOutView(TemplateView):
         logout(request)
         return redirect("login")
 
-
+@method_decorator(loginrequired,name="dispatch")
 class JobListView(ListView):
     model=Job
     template_name="listjobs.html"
     context_object_name = "jobs"
 
+@method_decorator(loginrequired,name="dispatch")
 class JobDetailView(DetailView):
     model=Job
     template_name="jobdetails.html"
@@ -58,6 +64,7 @@ class JobDetailView(DetailView):
 #         application.save()
 #         return redirect("alljobs")
 
+@method_decorator(loginrequired,name="dispatch")
 def apply_job(request,*args,**kwargs):
     jid = kwargs.get("id")
     job = Job.objects.get(id=jid)
@@ -65,6 +72,7 @@ def apply_job(request,*args,**kwargs):
     application.save()
     return redirect("alljobs")
 
+@method_decorator(loginrequired,name="dispatch")
 class ListAppliedJobs(TemplateView):
     model=Applications
     template_name="applicationlist.html"
@@ -74,6 +82,7 @@ class ListAppliedJobs(TemplateView):
         self.context["applications"]=applications
         return render(request,self.template_name,self.context)
 
+@method_decorator(loginrequired,name="dispatch")
 class JobseekerProfileCreateView(TemplateView):
     model=Jobseeker
     form_class=JobseekerProfileCreateForm
@@ -97,9 +106,24 @@ class JobseekerProfileCreateView(TemplateView):
                 messages.success(request,"you have already created your profile")
                 return render(request, self.template_name, self.context)
 
+# class JobseekerProfileDispaly(DetailView):
+#     model=MyUser
+#     template_name = "jprofiledispaly.html"
+#     context_object_name = "candidate"
 
 
+# class JobseekerProfileUpdateView(UpdateView):
+#     model=Jobseeker
+#     form_class=JobseekerProfileCreateForm
+#     template_name = "jprofileupdate.html"
+#     success_url = reverse_lazy("")
+#
+#
 
-
-
+class JobFilterView(TemplateView):
+    def get(self,request,*args,**kwargs):
+        search=request.GET.get('search')
+        jobs=Job.objects.filter((Q(location__icontains=search) | Q(description__icontains=search) | Q(skills_req__icontains=search)))
+        job_filter = JobFilter(request.GET, queryset=jobs)
+        return render(request, "filter.html",{'filter':job_filter})
 

@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,CreateView,ListView,UpdateView,DeleteView,DetailView
 from .models import MyUser,Employer,Job,Applications
-from .forms import UserRegistrationForm,LoginForm,EmployerForm,JobCreateForm
+from .forms import UserRegistrationForm,LoginForm,EmployerForm,JobCreateForm,JobApplicationForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from .decorators import loginrequired
+from django.utils.decorators import method_decorator
 # Create your views here.
 # Registration view
 class AccountCreationView(CreateView):
@@ -36,7 +38,9 @@ class SignInView(TemplateView):
                     return redirect("postedjobs")
 
                 else:
-                    print("failed")
+                    messages.error(request,"invalid user")
+                    return render(request, self.template_name, self.context)
+
         return render(request, self.template_name, self.context)
 
 class SignOutView(TemplateView):
@@ -44,13 +48,38 @@ class SignOutView(TemplateView):
         logout(request)
         return redirect("signin")
 
-
+@method_decorator(loginrequired,name="dispatch")
 class EmployerCreateView(CreateView):
     model=Employer
     form_class = EmployerForm
     template_name="addemployerdetails.html"
-    success_url=reverse_lazy("addjob")
+    context={}
+    def get(self,request,*args,**kwargs):
+        form=self.form_class()
+        self.context["form"] = form
+        return render(request, self.template_name, self.context)
+    def post(self,request,*args,**kwargs):
+        form=self.form_class(request.POST)
+        if form.is_valid():
+            location=form.cleaned_data.get("location")
+            website=form.cleaned_data.get("website")
+            address=form.cleaned_data.get("address")
+            employer=Employer(user=request.user,location=location,website=website,address=address)
+            try:
+                employer.save()
+            except:
+                messages.error(request,"you have already created your profile")
+            return render(request, self.template_name, self.context)
 
+class EmployerProfileDispalyView(TemplateView):
+    model=Employer
+    template_name = "employerprofile.html"
+    context={}
+
+    def get(self, request, *args, **kwargs):
+        employer = self.model.objects.filter(user=request.user)
+        self.context["employer"] =employer
+        return render(request, self.template_name, self.context)
 # class JobCreateView(CreateView):
 #     model=Job
 #     form_class = JobCreateForm
@@ -93,7 +122,7 @@ class EmployerCreateView(CreateView):
 #     model=Job
 #     context_object_name = "jobs"
 #     template_name = "listpostedjobs.html"
-
+@method_decorator(loginrequired,name="dispatch")
 class ListPostedJobView(TemplateView):
     model=Job
     context={}
@@ -108,30 +137,32 @@ class ListPostedJobView(TemplateView):
 
 
 
-
+@method_decorator(loginrequired,name="dispatch")
 class EditJobView(UpdateView):
     model=Job
     form_class = JobCreateForm
     template_name = "editjob.html"
     success_url = reverse_lazy("postedjobs")
 
+@method_decorator(loginrequired,name="dispatch")
 class JobDeleteView(DeleteView):
     model=Job
     template_name = "deletejob.html"
     success_url = reverse_lazy("postedjobs")
 
-
+@method_decorator(loginrequired,name="dispatch")
 class ApplicantListView(TemplateView):
     model=Applications
     context={}
     template_name = "applicantlist.html"
     def get(self,request,*args,**kwargs):
 
+
         applications=self.model.objects.filter(application_status="Pending")
         self.context["applications"]=applications
         return render(request, self.template_name, self.context)
 
-
+@method_decorator(loginrequired,name="dispatch")
 class JobCreateView(TemplateView):
     model= Job
     form_class=JobCreateForm
@@ -155,16 +186,29 @@ class JobCreateView(TemplateView):
             job=Job(employer_id=request.user.id,user=request.user,location=location,description=description,
                     skills_req=skills_req,salary=salary,exp_req=exp_req,job_status=job_status,closing_date=closing_date)
             job.save()
-
-
-
-
-
-
-
-
-
         return render(request, self.template_name, self.context)
+
+# class GetObjectMixin:
+#     def get_obect(self,id):
+#         return self.model.objects.get(id=id)
+
+@method_decorator(loginrequired,name="dispatch")
+class UpdateApplicationStatusView(UpdateView):
+    model=Applications
+    form_class=JobApplicationForm
+    template_name = "applicationstatus.html"
+    success_url = reverse_lazy("applicants")
+
+
+
+
+
+
+
+
+
+
+
 
 
 

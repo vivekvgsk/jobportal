@@ -1,0 +1,50 @@
+{%extends 'jobseekerhome.html'%}
+{%block body_block%}
+<div class="card" style="width:450px">
+    <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold;"><center>Search Here</center></h5>
+  <div class="card-body">
+    <form action="" method="get">
+
+        <table>
+         <center>  <input type="text" name="search" placeholder="Enter Keyword to search.....">&nbsp;&nbsp;<i class="fas fa-search"></i><input type="submit" value="Search" class="btn btn-success"></center>
+            <!--{{filter.form.as_table}}-->
+        </table>
+
+
+
+</form>
+</div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div>
+            <div class="card">
+                <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold">Search Result</h5>
+                <div class="card-body">
+                    <table class="table table-striped ">
+                        <tr class="bg-warning">
+                            <td>Company Name</td>
+                            <td>Position</td>
+                            <td>Location</td>
+                            <td>Salary</td>
+                            <td>Skills Required</td>
+                            <td></td>
+                        </tr>
+                        {%for job in filter.qs%}
+                        <tr>
+                            <td>{{job.user.first_name}}</td>
+                            <td>{{job.description}}</td>
+                            <td>{{job.location}}</td>
+                            <td>₹:{{job.salary}}</td>
+                            <td>{{job.skills_req}}</td>
+                            <td><a href="{%url 'apply' job.id%}" class="btn btn-primary">Apply</a></td>
+                        </tr>
+                        {%endfor%}
+                    </table>
+                </div>
+            </div>
+        </div>
+ </div>
+        </div>
+{%endblock%}

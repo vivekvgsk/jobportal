@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'company',
-    'jobseeker'
+    'jobseeker',
+    'django_filters'
+
 ]
 
 MIDDLEWARE = [

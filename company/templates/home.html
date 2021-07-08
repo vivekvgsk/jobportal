@@ -6,85 +6,84 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Creative - Start Bootstrap Theme</title>
-        <script src="https://kit.fontawesome.com/ed0e79b1f2.js" crossorigin="anonymous"></script>
+        <title>Jobportal</title>
+         <script src="https://kit.fontawesome.com/ed0e79b1f2.js" crossorigin="anonymous"></script>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap Icons-->
+        <!--<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />-->
+         <link rel="icon" type="image/x-icon" href="{%static 'assets/favicon.ico'%}"/>
+        <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-        <!-- SimpleLightbox plugin CSS-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{%static 'css/styles.css'%}" rel="stylesheet"/>
         <!--<link href="css/styles.css" rel="stylesheet" />-->
+        <link href="{%static 'css/style.css'%}" rel="stylesheet"/>
     </head>
-    <body id="page-top">
+    <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="{%url 'employerprofile'%}">Create Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{%url 'addjob'%}">Post Jobs</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{%url 'postedjobs'%}">List Jobs</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{%url 'applicants'%}">View Applications</a></li>
-                         </li>
-                    <li class="nav-item">
-                    <a class="nav-link active" href="{%url 'signout'%}">Logout</a>
+                <a class="navbar-brand" href="#!"><img src="/static/images/logo2.jpg" alt="" style="height:90px ;width:250px"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'employerprofile' %}">My Profile</a></li>
 
-                </ul>
+                        <li class="nav-item"><a class="nav-link" href="{%url 'addjob'%}">Post Jobs</a></li>
+                         <li class="nav-item"><a class="nav-link" href="{%url 'postedjobs'%}">List Jobs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{%url 'applicants'%}">View Applications</a></li>
+                         <!--<li class="nav-item"><a class="nav-link" href="">Log Out</a></li>-->
+                        <!--<li class="nav-item dropdown">-->
+                            <!--<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login</a>-->
+                            <!--<ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+
+                                <!--<li><hr class="dropdown-divider" /></li>-->
+                                <!--<li><a class="dropdown-item" href="{%url 'login'%}">As Jobseeker</a></li>-->
+                                <!--<li><a class="dropdown-item" href="{%url 'signin'%}">As Employer</a></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
                     </ul>
+                    <form class="d-flex">
+                        <a href="{%url 'signout'%}" class="btn btn-outline-danger" type="submit">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+
+                        </a>
+                    </form>
                 </div>
             </div>
         </nav>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 h-100">
-                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">Your Dream Job is Waiting</h1>
-                        <hr class="divider" />
-                    </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">Find the Job That Fits Your Life! Its Time to do the Best work of your Life! </p>
-                        <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
-                    </div>
+        <!-- Header-->
+        <header class="bg-primary py-5" style="background-image:url(/static/images/hand12.png);background-width:300px">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder" style="color:red">Find the Perfect Employees</h1>
+                    <p class="lead fw-normal text-red-50 mb-0"></p>
                 </div>
             </div>
         </header>
-        <!-- About-->
-        <section class="page-section bg-primary" id="about" >
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8 text-center">
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <!--<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">-->
+
  {%block body_block%}
 
 
 
 
             {%endblock%}
-                    </div>
+
+
                 </div>
-            </div>
+            <br>
         </section>
-
-
+        <!-- Footer-->
+        <footer class="py-5 bg-success">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+        </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- SimpleLightbox plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
         <!-- Core theme JS-->
-        <script src="{%static 'js/scripts.js'%}"></script>
         <!--<script src="js/scripts.js"></script>-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script src="{%static 'js/script.js'%}"></script>
     </body>
 </html>

@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div>
-            <div class="card" style="width:1000px;margin-left:-250px">
+            <div class="card" style="width:1000px;">
                 <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold">Job Applications
                     </h5>
                 <div class="card-body">
@@ -27,11 +27,15 @@
                         {%for application in applications%}
                         <tr>
                             <td>{{application.appllicant.first_name}}</td>
+                            <td>{{application.job.description}}</td>
+                            <td>{{application.appllicant.}}</td>
+                            <td>{{application.application_status}}</td>
+                            <td>{{application.job.employer.user}}</td>
 
 
 
                             <td>
-                                <a href="" class="btn btn-warning">Edit</a>
+                                <a href="{%url 'update' application.id%}" class="btn btn-warning">Edit</a>
                             </td>
                             <td>
                                 <a href="" class="btn btn-danger">Delete</a>

@@ -1,8 +1,8 @@
 {%extends 'home.html'%}
 {%block body_block%}
-<br><br><br>
-<div class="card" style="width:450px">
-  <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold">Fill Job Details</h5>
+<br>
+<div class="card" style="width:450px;margin-left:250px">
+  <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold;"><center>Fill Job Details</center> </h5>
   <div class="card-body">
     <form action="" method="post">
     {%csrf_token%}
@@ -10,7 +10,7 @@
             {{form.as_table}}
         </table>
 
-    <input type="submit" value="submit" class="btn btn-primary">
+    <input type="submit" value="submit" class="btn btn-primary" style="margin-left:150px;width:150px">
 
 </form>
 </div>
