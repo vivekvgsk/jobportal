@@ -1,5 +1,11 @@
 {%extends 'jobseekerhome.html'%}
 {%block body_block%}
+<div class="card bg-danger" style="height:50px">
+  <div class="card-body">
+    <h3 style="font-weight:bold;color:yellow"><center>APPLIED JOBS</center> </h3>
+  </div>
+</div>
+<br><br>
 <div>
     {%for application in applications%}
 
@@ -8,9 +14,9 @@
 
 
   <div class="card-body bg-info">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">{{application.appllicant}}&nbsp;&nbsp;&nbsp;<i class="fas fa-building"></i>&nbsp;&nbsp;&nbsp;{{application.job.employer.user.first_name}}&nbsp;&nbsp;{{application.job.employer.user.last_name}}&nbsp;&nbsp;&nbsp;<i class="fas fa-user-tie"></i>&nbsp;&nbsp;&nbsp;{{application.job.description}}&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;{{application.job.location}}&nbsp;&nbsp;&nbsp;{{application.application_status}}</p>
-    <a href="" class="btn btn-primary">View Details</a>
+    <h5 class="card-title">{{application.job.description}}</h5>
+    <p class="card-text">{{application.appllicant}}&nbsp;&nbsp;&nbsp;<i class="fas fa-building"></i>&nbsp;&nbsp;&nbsp;{{application.job.employer.user.first_name}}&nbsp;&nbsp;{{application.job.employer.user.last_name}}&nbsp;&nbsp;&nbsp;<i class="fas fa-user-tie"></i>&nbsp;&nbsp;&nbsp;{{application.job.description}}&nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;{{application.job.location}}&nbsp;&nbsp;&nbsp;Applied On:{{application.applied_date}}&nbsp;&nbsp;&nbsp;Current Status:{{application.application_status}}</p>
+    <!--<a href="" class="btn btn-primary">View Details</a>-->
   </div>
 </div>
 

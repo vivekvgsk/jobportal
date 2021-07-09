@@ -33,7 +33,7 @@ class LoginView(TemplateView):
                     login(request,user)
                     return redirect("alljobs")
                 else:
-                    messages.error(request, "invalid user")
+                    messages.error(request, "Invalid User")
                     return render(request, self.template_name, self.context)
 
         return render(request, self.template_name, self.context)
@@ -64,7 +64,7 @@ class JobDetailView(DetailView):
 #         application.save()
 #         return redirect("alljobs")
 
-@method_decorator(loginrequired,name="dispatch")
+@loginrequired
 def apply_job(request,*args,**kwargs):
     jid = kwargs.get("id")
     job = Job.objects.get(id=jid)
@@ -105,6 +105,7 @@ class JobseekerProfileCreateView(TemplateView):
             except:
                 messages.success(request,"you have already created your profile")
                 return render(request, self.template_name, self.context)
+        return render(request, self.template_name, self.context)
 
 # class JobseekerProfileDispaly(DetailView):
 #     model=MyUser

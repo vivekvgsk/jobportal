@@ -38,7 +38,7 @@ class SignInView(TemplateView):
                     return redirect("postedjobs")
 
                 else:
-                    messages.error(request,"invalid user")
+                    messages.error(request,"Invalid User")
                     return render(request, self.template_name, self.context)
 
         return render(request, self.template_name, self.context)
@@ -158,7 +158,7 @@ class ApplicantListView(TemplateView):
     def get(self,request,*args,**kwargs):
 
 
-        applications=self.model.objects.filter(application_status="Pending")
+        applications=self.model.objects.filter(job__employer__user__first_name=request.user)
         self.context["applications"]=applications
         return render(request, self.template_name, self.context)
 

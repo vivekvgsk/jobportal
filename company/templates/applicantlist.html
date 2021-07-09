@@ -13,32 +13,38 @@
                 <div class="card-body">
                     <table class="table table-bordered table table-striped table-hover">
                         <tr class="bg-warning">
+                            <td>Company Name</td>
                             <td>Applicant Name</td>
                             <td>Position</td>
                             <td>Qualification</td>
                             <td>Salary</td>
                             <td>Experience Required</td>
-                            <td>Posted Date</td>
-                            <td>Closing Date</td>
+                            <td>Applied Date Date</td>
                             <td>Status</td>
-                            <td colspan="3">Action</td>
+
+                            <td colspan="4">Action</td>
 
                         </tr>
                         {%for application in applications%}
                         <tr>
+                             <td>{{application.job.employer.user}}</td>
                             <td>{{application.appllicant.first_name}}</td>
                             <td>{{application.job.description}}</td>
-                            <td>{{application.appllicant.}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{application.applied_date}}</td>
                             <td>{{application.application_status}}</td>
-                            <td>{{application.job.employer.user}}</td>
 
 
 
-                            <td>
-                                <a href="{%url 'update' application.id%}" class="btn btn-warning">Edit</a>
+
+
+                            <td colspan="">
+                                <a href="{%url 'updatestatus' application.id%}" class="btn btn-danger">Edit Status</a>
                             </td>
                             <td>
-                                <a href="" class="btn btn-danger">Delete</a>
+
 
                             </td>
                         </tr>
