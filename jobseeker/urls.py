@@ -16,8 +16,9 @@ urlpatterns = [
     path("appliedjobs",ListAppliedJobs.as_view(),name="listappliedjobs"),
     path("profile",JobseekerProfileCreateView.as_view(),name="jprofile"),
     path("logout",LogOutView.as_view(),name="logout"),
-    path("filter",JobFilterView.as_view(),name="filter")
-    # path("dispalyprofile/<int:pk>",JobseekerProfileDispaly.as_view(),name="profiledisplay")
+    path("filter",JobFilterView.as_view(),name="filter"),
+    # path("profiledisplay/<int:pk>",JobseekerProfileDispaly.as_view(),name="jprofiledispaly")
+
 
 
 ]

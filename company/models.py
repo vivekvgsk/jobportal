@@ -35,8 +35,10 @@ class Job(models.Model):
     date_posted=models.DateField(auto_now=True)
     closing_date=models.DateField()
     job_options=(("Active","Active"),
-                 ("Closed","Closed"))
+                 ("Closed","Closed"),)
+
     job_status=models.CharField(max_length=10,choices=job_options,default="Active")
+
 
 class Applications(models.Model):
 
@@ -47,5 +49,6 @@ class Applications(models.Model):
                  ("Rejected","Rejected"),
                  ("Pending","Pending"))
     application_status=models.CharField(max_length=15,choices=app_options,default="Pending")
+
 
 

@@ -107,10 +107,15 @@ class JobseekerProfileCreateView(TemplateView):
                 return render(request, self.template_name, self.context)
         return render(request, self.template_name, self.context)
 
-# class JobseekerProfileDispaly(DetailView):
+# class JobseekerProfileDispaly(TemplateView):
 #     model=MyUser
 #     template_name = "jprofiledispaly.html"
-#     context_object_name = "candidate"
+#     context={}
+#     def get(self,request,*args,**kwargs):
+#         cid=kwargs.get("id")
+#         candidate=self.model.objects.get(id=cid)
+#         self.context["candidate"]=candidate
+#         return render(request, self.template_name, self.context)
 
 
 # class JobseekerProfileUpdateView(UpdateView):

@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from .decorators import loginrequired
 from django.utils.decorators import method_decorator
+from django.core.mail import send_mail
 # Create your views here.
 # Registration view
 class AccountCreationView(CreateView):
@@ -128,7 +129,7 @@ class ListPostedJobView(TemplateView):
     context={}
     template_name = "listpostedjobs.html"
     def get(self,request,*args,**kwargs):
-        jobs=Job.objects.filter(user=request.user)
+        jobs=Job.objects.filter(user=request.user).order_by("date_posted")
         self.context["jobs"]=jobs
         return render(request, self.template_name, self.context)
 
@@ -192,12 +193,54 @@ class JobCreateView(TemplateView):
 #     def get_obect(self,id):
 #         return self.model.objects.get(id=id)
 
+# @method_decorator(loginrequired,name="dispatch")
+# class UpdateApplicationStatusView(UpdateView):
+#     model=Applications
+#     form_class=JobApplicationForm
+#     template_name = "applicationstatus.html"
+#     success_url = reverse_lazy("applicants")
+
 @method_decorator(loginrequired,name="dispatch")
-class UpdateApplicationStatusView(UpdateView):
+class UpdateApplicationStatusView(TemplateView):
     model=Applications
     form_class=JobApplicationForm
     template_name = "applicationstatus.html"
-    success_url = reverse_lazy("applicants")
+    context={}
+    def get(self,request,*args,**kwargs):
+        aid = kwargs.get("id")
+        application = self.model.objects.get(id=aid)
+        form=self.form_class(instance=application)
+        self.context["form"]=form
+        return render(request, self.template_name, self.context)
+    def post(self,request,*args,**kwargs):
+        aid = kwargs.get("id")
+        application = self.model.objects.get(id=aid)
+        form=self.form_class(instance=application,data=request.POST)
+        if form.is_valid():
+            form.save()
+            applicant=form.cleaned_data.get("appllicant")
+            status=form.cleaned_data.get("application_status")
+            email=applicant.email
+            print(email)
+            # jid=Applications.job.job_id
+            # application=self.model(job_id=jid,appllicant=applicant,application_status=status)
+            # application.save()
+
+
+            msg="Dear Candidate, " \
+                "Your Application has been   "+status+"  by the employer SELECTED Candidates may please contact our HR department for further informations"
+            send_mail(
+                'Reply for your Job Application',
+                msg,
+                'vivekvgsk@gmail.com',
+                [email],
+                fail_silently=False,
+            )
+            return redirect("applicants")
+        return render(request, self.template_name, self.context)
+
+
+
 
 
 
