@@ -44,10 +44,15 @@ class LogOutView(TemplateView):
         return redirect("login")
 
 @method_decorator(loginrequired,name="dispatch")
-class JobListView(ListView):
+class JobListView(TemplateView):
     model=Job
     template_name="listjobs.html"
-    context_object_name = "jobs"
+    context={}
+
+    def get(self,request,*args,**kwargs):
+        jobs=self.model.objects.filter(job_status="Active")
+        self.context["jobs"]=jobs
+        return render(request, self.template_name, self.context)
 
 @method_decorator(loginrequired,name="dispatch")
 class JobDetailView(DetailView):
@@ -70,6 +75,8 @@ def apply_job(request,*args,**kwargs):
     job = Job.objects.get(id=jid)
     application = Applications(job=job, appllicant=request.user)
     application.save()
+    job.job_status="Closed"
+    job.save()
     return redirect("alljobs")
 
 @method_decorator(loginrequired,name="dispatch")
@@ -107,15 +114,15 @@ class JobseekerProfileCreateView(TemplateView):
                 return render(request, self.template_name, self.context)
         return render(request, self.template_name, self.context)
 
-# class JobseekerProfileDispaly(TemplateView):
-#     model=MyUser
-#     template_name = "jprofiledispaly.html"
-#     context={}
-#     def get(self,request,*args,**kwargs):
-#         cid=kwargs.get("id")
-#         candidate=self.model.objects.get(id=cid)
-#         self.context["candidate"]=candidate
-#         return render(request, self.template_name, self.context)
+class JobseekerProfileDispaly(TemplateView):
+    model=Jobseeker
+    template_name = "jprofiledisplay.html"
+    context={}
+    def get(self,request,*args,**kwargs):
+        # cid=kwargs.get("id")
+        candidate=self.model.objects.get(user=request.user)
+        self.context["candidate"]=candidate
+        return render(request, self.template_name, self.context)
 
 
 # class JobseekerProfileUpdateView(UpdateView):

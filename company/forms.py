@@ -1,6 +1,7 @@
 from .models import MyUser,Employer,Job,Jobseeker,Applications
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from datetime import date
 from django.db import models
 
 class UserRegistrationForm(UserCreationForm):
@@ -49,6 +50,14 @@ class JobCreateForm(forms.ModelForm):
             "exp_req": forms.TextInput(attrs={"class": "form-control form-label"}),
             "closing_date": forms.TextInput(attrs={"class": "form-control form-label"}),
         }
+    def clean(self):
+        cleaned_data=super().clean()
+        closing_date=cleaned_data.get("closing_date")
+        today=date.today()
+        if closing_date<today:
+            msg="invalid date"
+            self.add_error("closing_date",msg)
+
 
 # class JobCreateForm(forms.Form):
 #     employer=forms.ModelMultipleChoiceField(queryset=MyUser.objects.filter(role="Employer"))

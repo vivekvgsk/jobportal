@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,CreateView,ListView,UpdateView,DeleteView,DetailView
-from .models import MyUser,Employer,Job,Applications
+from .models import MyUser,Employer,Job,Applications,Jobseeker
 from .forms import UserRegistrationForm,LoginForm,EmployerForm,JobCreateForm,JobApplicationForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate,login,logout
@@ -78,8 +78,8 @@ class EmployerProfileDispalyView(TemplateView):
     context={}
 
     def get(self, request, *args, **kwargs):
-        employer = self.model.objects.filter(user=request.user)
-        self.context["employer"] =employer
+        employer = self.model.objects.get(user=request.user)
+        self.context["employer"] = employer
         return render(request, self.template_name, self.context)
 # class JobCreateView(CreateView):
 #     model=Job
@@ -163,6 +163,11 @@ class ApplicantListView(TemplateView):
         self.context["applications"]=applications
         return render(request, self.template_name, self.context)
 
+# class ApplicantProfileView(DetailView):
+#     model=Jobseeker
+#     template_name = "jobseekerprofile.html"
+#     context_object_name = "applicant"
+
 @method_decorator(loginrequired,name="dispatch")
 class JobCreateView(TemplateView):
     model= Job
@@ -227,8 +232,8 @@ class UpdateApplicationStatusView(TemplateView):
             # application.save()
 
 
-            msg="Dear Candidate, " \
-                "Your Application has been   "+status+"  by the employer SELECTED Candidates may please contact our HR department for further informations"
+            msg="Dear Applicant, " \
+                "Your Application has been   "+status+"  by the employer("+str(request.user)+") SELECTED Candidates may please contact our HR department for further informations"
             send_mail(
                 'Reply for your Job Application',
                 msg,

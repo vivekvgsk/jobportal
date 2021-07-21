@@ -38,6 +38,9 @@ class Job(models.Model):
                  ("Closed","Closed"),)
 
     job_status=models.CharField(max_length=10,choices=job_options,default="Active")
+    # options = (("not_applied", "not_applied"),
+    #            ("applied"), ("applied"))
+    # applied_status = models.CharField(max_length=20, choices=options, default="not_applied")
 
 
 class Applications(models.Model):
@@ -49,6 +52,7 @@ class Applications(models.Model):
                  ("Rejected","Rejected"),
                  ("Pending","Pending"))
     application_status=models.CharField(max_length=15,choices=app_options,default="Pending")
+
 
 
 

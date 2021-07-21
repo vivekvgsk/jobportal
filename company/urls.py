@@ -8,13 +8,14 @@ urlpatterns = [
     path("logout",SignOutView.as_view(),name="signout"),
     path("home",TemplateView.as_view(template_name="userhome.html"),name="userhome"),
     path("empprofile",EmployerCreateView.as_view(),name="employerprofile"),
-    # path("empprofile/<int:pk>",EmployerProfileDispalyView.as_view(),name="empprofileview"),
+    path("empprofiledisplay",EmployerProfileDispalyView.as_view(),name="empprofileview"),
     path("addjob",JobCreateView.as_view(),name="addjob"),
     path("postedjobs",ListPostedJobView.as_view(),name="postedjobs"),
     path("editjob/<int:pk>",EditJobView.as_view(),name="update"),
     path("removejob/<int:pk>",JobDeleteView.as_view(),name="removejob"),
     path("applicants",ApplicantListView.as_view(),name="applicants"),
-    path("status/<int:id>",UpdateApplicationStatusView.as_view(),name="updatestatus")
+    path("status/<int:id>",UpdateApplicationStatusView.as_view(),name="updatestatus"),
+
 
 
 ]

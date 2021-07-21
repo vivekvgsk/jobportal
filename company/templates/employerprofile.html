@@ -1,9 +1,30 @@
 {%extends 'home.html'%}
 {%block body_block%}
+{%if employer%}
+<center><h5 style="color:red">If you are not created a profile please click <a href="{%url 'employerprofile'%}">Here</a></h5></center>
+<div class="card" style="width: 25rem;margin-left:280px">
+    <center><img src="/static/images/cop.png" class="card-img-top" alt="..." style="width:150px;"></center>
+  <div class="card-header">
+     <h2 style="color:blue;font-weight:bold"><center>{{request.user.first_name}}&nbsp;{{request.user.last_name}}</center></h2>
+  </div>
+  <ul class="list-group list-group-flush">
+       <li class="list-group-item"><h5 style="color:red;font-weight:bold">Gender&nbsp;:&nbsp;{{request.user.gender}}</h5></li>
+      <li class="list-group-item"><h5 style="color:red;font-weight:bold">Location&nbsp;:&nbsp;{{employer.location}}</h5></li>
+      <li class="list-group-item"><h5 style="color:red;font-weight:bold"> Address&nbsp;:&nbsp;{{employer.address}}</h5></li>
+    <li class="list-group-item"> <h5 style="color:red;font-weight:bold">Phone&nbsp;:&nbsp;{{request.user.phone}}</h5></li>
+      <li class="list-group-item"><h5 style="color:red;font-weight:bold">E-mail&nbsp;:&nbsp;{{request.user.email}}</h5></li>
+      <li class="list-group-item"><h5 style="color:red;font-weight:bold">Website&nbsp;:&nbsp;{{employer.website}}</h5></li>
 
-{{request.user}}
-{{employer.location}}
-{{employer.user.first_name}}
-{{employer.website}}
 
+
+
+
+
+  </ul>
+</div>
+{%endif%}
 {%endblock%}
+
+
+
+
