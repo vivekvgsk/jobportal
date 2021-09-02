@@ -125,18 +125,20 @@ class JobseekerProfileDispaly(TemplateView):
         return render(request, self.template_name, self.context)
 
 
-# class JobseekerProfileUpdateView(UpdateView):
-#     model=Jobseeker
-#     form_class=JobseekerProfileCreateForm
-#     template_name = "jprofileupdate.html"
-#     success_url = reverse_lazy("")
-#
-#
+class JobseekerProfileUpdateView(UpdateView):
+    model=Jobseeker
+    form_class=JobseekerProfileCreateForm
+    template_name = "jprofileupdate.html"
+    success_url = reverse_lazy("jprofiledispaly")
+
+
 
 class JobFilterView(TemplateView):
     def get(self,request,*args,**kwargs):
-        search=request.GET.get('search')
-        jobs=Job.objects.filter((Q(location__icontains=search) | Q(description__icontains=search) | Q(skills_req__icontains=search)))
-        job_filter = JobFilter(request.GET, queryset=jobs)
-        return render(request, "filter.html",{'filter':job_filter})
+        search=request.GET.get('search',None)
+        if search:
+            jobs=Job.objects.filter((Q(location__icontains=search) | Q(description__icontains=search) | Q(skills_req__icontains=search)))
+
+            return render(request, "filter.html",{'jobs':jobs})
+        return render(request, "filter.html")
 

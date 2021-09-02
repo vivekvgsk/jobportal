@@ -1,13 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{%extends 'home.html'%}
+{%block body_block%}
+{%if candidate%}
 
-{{applicant.qualification}}
+<div class="card" style="width: 25rem;margin-left:280px">
+    <center> <img src="/static/images/pro.png" class="card-img-top" alt="..." style="width:150px;"></center>
+  <div class="card-header">
+     <h2 style="color:blue;font-weight:bold"><center>{{candidate.user}}</center></h2>
+  </div>
+  <ul class="list-group list-group-flush">
+      <li class="list-group-item"> <h5 style="font-weight:bold">Gender &nbsp;:&nbsp;{{candidate.user.gender}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">Qualification &nbsp;:&nbsp;{{candidate.qualification}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">PassoutYear&nbsp;:&nbsp;{{candidate.passout_year}}</h5></li>
+     <li class="list-group-item"><h5 style="font-weight:bold">Phone&nbsp;:&nbsp;{{candidate.user.phone}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">E-mail&nbsp;:&nbsp;{{candidate.user.email}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">Skills&nbsp;:&nbsp;{{candidate.skills}}</h5></li>
+    <li class="list-group-item"><h5 style="font-weight:bold">Experience&nbsp;:&nbsp;{{candidate.experience}}</h5></li>
+      <li class="list-group-item"><a href="{%url 'applicants'%}" class="btn btn-success" style="font-weight:bold;margin-left:120px;width:100px">Back</a></li>
+  </ul>
+</div>
+{%endif%}
+{%endblock%}
 
 
-</body>
-</html>

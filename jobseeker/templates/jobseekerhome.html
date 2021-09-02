@@ -28,7 +28,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'jprofiledispaly'%}">My Profile</a></li>
 
                         <li class="nav-item"><a class="nav-link active" href="{%url 'alljobs'%}">New Jobs</a></li>
-                         <li class="nav-item"><a class="nav-link active" href="{%url 'listappliedjobs'%}">My applications</a></li>
+                         <li class="nav-item"><a class="nav-link active" href="{%url 'listappliedjobs'%}">My Applications</a></li>
                         <li class="nav-item"><a class="nav-link active" href="{%url 'filter'%}">Search</a></li>
 
 
@@ -42,7 +42,7 @@
                             <!--</ul>-->
                         <!--</li>-->
                     </ul>
-                     &nbsp;&nbsp;  <a class="navbar-brand" href="#!" style="text-transform: capitalize;">Hi,&nbsp;{{request.user}}</a>
+                     &nbsp;&nbsp;  <a class="navbar-brand" href="#!" style="text-transform: capitalize;color:white;font-weight:bold"><i class="fas fa-user-circle"></i>Hi,&nbsp;{{request.user}}</a>
                     <form class="d-flex">
                         <a href="{%url 'logout'%}" class="btn btn-outline-danger" type="submit">
                             <i class="fas fa-sign-out-alt"></i>

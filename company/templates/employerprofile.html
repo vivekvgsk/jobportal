@@ -8,17 +8,13 @@
      <h2 style="color:blue;font-weight:bold"><center>{{request.user.first_name}}&nbsp;{{request.user.last_name}}</center></h2>
   </div>
   <ul class="list-group list-group-flush">
-       <li class="list-group-item"><h5 style="color:red;font-weight:bold">Gender&nbsp;:&nbsp;{{request.user.gender}}</h5></li>
-      <li class="list-group-item"><h5 style="color:red;font-weight:bold">Location&nbsp;:&nbsp;{{employer.location}}</h5></li>
-      <li class="list-group-item"><h5 style="color:red;font-weight:bold"> Address&nbsp;:&nbsp;{{employer.address}}</h5></li>
-    <li class="list-group-item"> <h5 style="color:red;font-weight:bold">Phone&nbsp;:&nbsp;{{request.user.phone}}</h5></li>
-      <li class="list-group-item"><h5 style="color:red;font-weight:bold">E-mail&nbsp;:&nbsp;{{request.user.email}}</h5></li>
-      <li class="list-group-item"><h5 style="color:red;font-weight:bold">Website&nbsp;:&nbsp;{{employer.website}}</h5></li>
-
-
-
-
-
+       <li class="list-group-item"><h5 style="font-weight:bold">Gender&nbsp;:&nbsp;{{request.user.gender}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">Location&nbsp;:&nbsp;{{employer.location}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold"> Address&nbsp;:&nbsp;{{employer.address}}</h5></li>
+    <li class="list-group-item"> <h5 style="font-weight:bold">Phone&nbsp;:&nbsp;{{request.user.phone}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">E-mail&nbsp;:&nbsp;{{request.user.email}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">Website&nbsp;:&nbsp;{{employer.website}}</h5></li>
+<li class="list-group-item"><a href="{%url 'empprofileedit' employer.id%}" class="btn btn-success" style="font-weight:bold;margin-left:120px;width:100px">Edit</a></li>
 
   </ul>
 </div>

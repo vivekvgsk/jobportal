@@ -2,7 +2,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 from .views import LoginView
 from company.views import AccountCreationView,SignInView
-from .views import JobListView,JobDetailView,apply_job,ListAppliedJobs,JobseekerProfileCreateView,LogOutView,JobFilterView,JobseekerProfileDispaly
+from .views import JobListView,JobDetailView,apply_job,ListAppliedJobs,JobseekerProfileCreateView,LogOutView,JobFilterView,JobseekerProfileDispaly,JobseekerProfileUpdateView
 
 urlpatterns = [
     path("login",LoginView.as_view(),name="login"),
@@ -17,7 +17,8 @@ urlpatterns = [
     path("profile",JobseekerProfileCreateView.as_view(),name="jprofile"),
     path("logout",LogOutView.as_view(),name="logout"),
     path("search",JobFilterView.as_view(),name="filter"),
-    path("profiledisplay",JobseekerProfileDispaly.as_view(),name="jprofiledispaly")
+    path("profiledisplay",JobseekerProfileDispaly.as_view(),name="jprofiledispaly"),
+    path("jprofileedit<int:pk>",JobseekerProfileUpdateView.as_view(),name="jprofileedit")
 
 
 

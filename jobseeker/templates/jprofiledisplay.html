@@ -8,18 +8,14 @@
      <h2 style="color:blue;font-weight:bold"><center>{{request.user.first_name}}{{request.user.last_name}}</center></h2>
   </div>
   <ul class="list-group list-group-flush">
-      <li class="list-group-item"> <h5 style="color:red;font-weight:bold">Gender &nbsp;:&nbsp;{{request.user.gender}}</h5></li>
-      <li class="list-group-item"><h5 style="color:red;font-weight:bold">Qualification &nbsp;:&nbsp;{{candidate.qualification}}</h5></li>
-      <li class="list-group-item"><h5 style="color:red;font-weight:bold">PassoutYear&nbsp;:&nbsp;{{candidate.passout_year}}</h5></li>
-     <li class="list-group-item"><h5 style="color:red;font-weight:bold">Phone&nbsp;:&nbsp;{{request.user.phone}}</h5></li>
-      <li class="list-group-item"><h5 style="color:red;font-weight:bold">E-mail&nbsp;:&nbsp;{{request.user.email}}</h5></li>
-      <li class="list-group-item"><h5 style="color:red;font-weight:bold">Skills&nbsp;:&nbsp;{{candidate.skills}}</h5></li>
-
-
-
-
-
-    <li class="list-group-item"><h5 style="color:red;font-weight:bold">Experience&nbsp;:&nbsp;{{candidate.experience}}</h5></li>
+      <li class="list-group-item"> <h5 style="font-weight:bold">Gender &nbsp;:&nbsp;{{request.user.gender}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">Qualification &nbsp;:&nbsp;{{candidate.qualification}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">PassoutYear&nbsp;:&nbsp;{{candidate.passout_year}}</h5></li>
+     <li class="list-group-item"><h5 style="font-weight:bold">Phone&nbsp;:&nbsp;{{request.user.phone}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">E-mail&nbsp;:&nbsp;{{request.user.email}}</h5></li>
+      <li class="list-group-item"><h5 style="font-weight:bold">Skills&nbsp;:&nbsp;{{candidate.skills}}</h5></li>
+    <li class="list-group-item"><h5 style="font-weight:bold">Experience&nbsp;:&nbsp;{{candidate.experience}}</h5></li>
+      <li class="list-group-item"><a href="{%url 'jprofileedit' candidate.id%}" class="btn btn-success" style="font-weight:bold;margin-left:120px;width:100px">Edit</a></li>
   </ul>
 </div>
 {%endif%}

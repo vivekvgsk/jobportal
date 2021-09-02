@@ -81,6 +81,16 @@ class EmployerProfileDispalyView(TemplateView):
         employer = self.model.objects.get(user=request.user)
         self.context["employer"] = employer
         return render(request, self.template_name, self.context)
+
+
+class EmployerProfileEditView(UpdateView):
+    model=Employer
+    form_class=EmployerForm
+    template_name = "empprofileedit.html"
+    success_url = reverse_lazy("empprofileview")
+
+
+
 # class JobCreateView(CreateView):
 #     model=Job
 #     form_class = JobCreateForm
@@ -129,7 +139,7 @@ class ListPostedJobView(TemplateView):
     context={}
     template_name = "listpostedjobs.html"
     def get(self,request,*args,**kwargs):
-        jobs=Job.objects.filter(user=request.user).order_by("date_posted")
+        jobs=Job.objects.filter(user=request.user).order_by("-date_posted")
         self.context["jobs"]=jobs
         return render(request, self.template_name, self.context)
 
@@ -163,10 +173,10 @@ class ApplicantListView(TemplateView):
         self.context["applications"]=applications
         return render(request, self.template_name, self.context)
 
-# class ApplicantProfileView(DetailView):
-#     model=Jobseeker
-#     template_name = "jobseekerprofile.html"
-#     context_object_name = "applicant"
+class ApplicantProfileView(DetailView):
+    model=Jobseeker
+    template_name = "jobseekerprofile.html"
+    context_object_name = "candidate"
 
 @method_decorator(loginrequired,name="dispatch")
 class JobCreateView(TemplateView):
@@ -233,7 +243,7 @@ class UpdateApplicationStatusView(TemplateView):
 
 
             msg="Dear Applicant, " \
-                "Your Application has been   "+status+"  by the employer("+str(request.user)+") SELECTED Candidates may please contact our HR department for further informations"
+                "Your Application has been   "+status+"  by "+str(request.user)+" SELECTED Candidates may please contact our HR department for further informations"
             send_mail(
                 'Reply for your Job Application',
                 msg,

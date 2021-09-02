@@ -1,0 +1,24 @@
+{%extends 'home.html'%}
+{%block body_block%}
+
+
+
+    <!--<div class="row"><h5>NB: If you have already created your profile ,Please click the Update Button to Update it</h5></div>-->
+<div class="card" style="width:450px;margin-left:250px">
+    <h5 class="card-header" style="background-color:#229af0;color:white;font-weight:bold;"><center>Update The Details</center></h5>
+  <div class="card-body">
+    <form action="" method="post">
+    {%csrf_token%}
+        <table>
+            {{form.as_table}}
+        </table>
+
+    <input type="submit" value="Submit" class="btn btn-success" style="margin-left:150px;width:150px">
+        <!--<input type="submit" value="Update" class="btn btn-info">-->
+
+</form>
+
+</div>
+</div>
+
+{% endblock%}
