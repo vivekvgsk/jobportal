@@ -18,6 +18,12 @@ class UserRegistrationForm(UserCreationForm):
         "password2": forms.PasswordInput(attrs={"class": "form-control form-label"}),
        }
 
+    def __init__(self, *args, **kwargs):
+        super(UserRegistrationForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['first_name','last_name','email','username', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
+
 class LoginForm(forms.Form):
     username=forms.CharField(widget=forms.TextInput(attrs={"class": "form-control form-label","placeholder":"Enter Username"}))
     password=forms.CharField(widget=forms.PasswordInput(attrs={"class": "form-control form-label","placeholder":"Enter Username"}))
